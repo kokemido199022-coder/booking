@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>حجز الخدمات</title>
+  <meta name="description" content="اختر الخدمة واحجز عبر واتساب مباشرة." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="brand">
+        <div class="brand__logo">LOGO</div>
+        <div class="brand__text">
+          <div class="brand__name">صفحة الحجز</div>
+          <div class="brand__tag">اختر الخدمة ثم اضغط “احجز الآن”</div>
+        </div>
+      </div>
+
+      <a class="btn btn--ghost" href="#packages">الخدمات</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>احجز خلال أقل من دقيقة</h1>
+      <p class="muted">اختر الباقة وسيتم تجهيز رسالة واتساب تلقائيًا بالخدمة المختارة.</p>
+    </section>
+
+    <section id="packages" class="packages">
+      <article class="card package" data-package="باقة رفاهية" data-price="299">
+        <div class="package__head">
+          <h2>باقة رفاهية</h2>
+          <div class="price">299 <span>ريال / الجلسة</span></div>
+        </div>
+        <p class="muted">تجربة دافئة وتنظيف عميق لأسبوعك المرهق.</p>
+        <ul class="list">
+          <li>مساج استرخائي</li>
+          <li>حمام مغربي</li>
+          <li>تنظيف عميق للجسم</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة نشاط" data-price="159">
+        <div class="package__head">
+          <h2>باقة نشاط</h2>
+          <div class="price">159 <span>ريال / الجلسة</span></div>
+        </div>
+        <p class="muted">للانتعاش السريع وإعادة النشاط.</p>
+        <ul class="list">
+          <li>مساج (استرخائي / عميق / رياضي)</li>
+          <li>جاكوزي أقدام</li>
+          <li>جلسة مركزة لتخفيف الشد</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+    </section>
+  </main>
+
+  <div class="stickyBar" id="stickyBar">
+    <div class="container stickyBar__inner">
+      <div class="chosen">
+        <div class="chosen__title" id="chosenTitle">اختر باقة للمتابعة</div>
+        <div class="chosen__meta muted" id="chosenMeta">سيتم تجهيز رسالة واتساب تلقائيًا.</div>
+      </div>
+
+      <a class="btn btn--primary btn--glow" id="bookNow" href="#" target="_blank" rel="noopener">
+        احجز الآن
+      </a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
