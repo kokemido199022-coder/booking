@@ -34,14 +34,14 @@ function setChosenUI(){
   const book  = document.getElementById("bookNow");
 
   if (!selected.name){
-    title.textContent = "اختر باقة للمتابعة";
-    meta.textContent  = "سيتم تجهيز رسالة واتساب تلقائيًا.";
+    title.textContent = "احجز الآن";
+    meta.textContent  = "اختر الباقة وسيتم نقلك لواتساب مباشرة";
     book.href = waLink("السلام عليكم، أبغى استفسر عن الباقات المتاحة.");
     return;
   }
 
-  title.textContent = `تم اختيار: ${selected.name}`;
-  meta.textContent  = `السعر: ${selected.price} ريال — اضغط “احجز الآن” للواتساب.`;
+  title.textContent = `احجز الآن`;
+  meta.textContent  = `${selected.name} - السعر: ${selected.price} ريال`;
   book.href = waLink(buildMessage());
 }
 
