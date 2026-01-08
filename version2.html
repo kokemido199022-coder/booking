@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EHTIMAM SPA - النسخة الثانية</title>
+<meta property="og:title" content="EHTIMAM SPA" />
+<meta property="og:description" content="تجربة فخمة من الاسترخاء والعافية" />
+  <meta name="description" content="اختر الخدمة واحجز عبر واتساب مباشرة." />
+  <style>
+    :root{
+      --primary: #ec4899;
+      --secondary: #1f1629;
+      --accent: #a855f7;
+      --accent2: #d946ef;
+      --text: #faf5ff;
+      --muted: rgba(250,245,255,.65);
+      --card-bg: linear-gradient(135deg, rgba(236,72,153,.1), rgba(31,22,41,.2));
+      --shadow: 0 25px 50px rgba(0,0,0,.5);
+      --glow: 0 0 30px rgba(168,85,247,.3);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+    body{
+      color:var(--text);
+      background: linear-gradient(135deg, #1f1629 0%, #3d1f47 50%, #1f1629 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(236,72,153,.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(168,85,247,.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1000px, 95%);margin:0 auto;position:relative;z-index:1}
+
+    .topbar{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter: blur(15px);
+      background:rgba(31,22,41,.8);
+      border-bottom:2px solid rgba(236,72,153,.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    }
+    .topbar__inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:16px}
+    .brand__logo{
+      width:60px;height:60px;border-radius:16px;
+      background: linear-gradient(135deg, rgba(236,72,153,.2), rgba(168,85,247,.2));
+      border:2px solid var(--primary);
+      display:grid;place-items:center;
+      box-shadow: var(--glow);
+    }
+    .brand__name{font-weight:900;font-size:18px;background: linear-gradient(135deg, var(--primary), var(--accent2));-webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text}
+    .brand__tag{font-size:12px;color:var(--muted)}
+
+    .hero{padding:40px 0 30px;text-align:center}
+    .hero h1{margin:0 0 12px;font-size:42px;background: linear-gradient(135deg, var(--primary), var(--accent2));-webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text}
+    .hero p{color:var(--muted);line-height:1.8;font-size:16px}
+
+    .packages{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap:24px;
+      padding-bottom:120px;
+    }
+
+    .card{
+      background: var(--card-bg);
+      border:2px solid rgba(236,72,153,.3);
+      border-radius:24px;
+      box-shadow: var(--shadow);
+      padding:24px;
+      backdrop-filter: blur(10px);
+      transition: all .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(236,72,153,.1) 0%, transparent 70%);
+      transition: all .3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow), var(--glow);
+      transform: translateY(-8px);
+    }
+
+    .card:hover::before {
+      top: -30%;
+      right: -30%;
+    }
+
+    .package__head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:16px;position:relative;z-index:1}
+    .package__head h2{margin:0;font-size:22px;color:var(--text)}
+    .price{
+      background: linear-gradient(135deg, var(--primary), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight:900;
+      font-size:20px;
+      white-space:nowrap;
+    }
+    .price span{color:rgba(236,72,153,.7);font-weight:600;font-size:12px;margin-right:6px}
+
+    .duration {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(236,72,153,.15);
+      border: 1px solid rgba(236,72,153,.4);
+      color: var(--primary);
+      margin-top: 8px;
+    }
+
+    .duration::before { content: "⏱️"; }
+
+    .card > p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 12px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .list{margin:16px 0 0;padding:0;list-style:none;position:relative;z-index:1}
+    .list li{
+      display:flex;align-items:flex-start;gap:10px;
+      padding:10px 0;
+      color:var(--text);
+      font-size: 14px;
+    }
+    .list li::before{
+      content:"✓";
+      color:var(--primary);
+      font-weight:900;
+      width:20px;flex:0 0 20px;
+      display:inline-grid;place-items:center;
+      border:1px solid rgba(236,72,153,.4);
+      border-radius:6px;
+      background:rgba(236,72,153,.1);
+      height:20px;
+    }
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 20px;border-radius:12px;
+      border:none;
+      font-weight:700;
+      cursor:pointer;
+      transition:all .2s ease;
+      position:relative;
+      font-size: 14px;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn--primary{
+      background: linear-gradient(135deg, var(--primary), var(--accent2));
+      color:#fff;
+      width: 100%;
+      margin-top: 16px;
+      box-shadow: 0 10px 25px rgba(236,72,153,.3);
+    }
+    .btn--primary:hover {
+      box-shadow: 0 15px 35px rgba(236,72,153,.4);
+    }
+    .btn--ghost{
+      background:transparent;
+      color:var(--muted);
+      border: 1px solid rgba(236,72,153,.3);
+    }
+
+    .stickyBar{
+      position:fixed;left:0;right:0;bottom:0;
+      background:rgba(31,22,41,.95);
+      border-top:2px solid rgba(236,72,153,.3);
+      backdrop-filter: blur(15px);
+      z-index: 15;
+    }
+    .stickyBar__inner{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+    .chosen__title{font-weight:900;background: linear-gradient(135deg, var(--primary), var(--accent2));-webkit-background-clip: text;-webkit-text-fill-color: transparent;background-clip: text}
+    .chosen__meta{font-size:12px;color:var(--muted)}
+
+    .btn--glow {
+      box-shadow: 0 0 20px rgba(236,72,153,.4);
+    }
+
+    .package.selected{
+      border-color: var(--primary);
+      background: linear-gradient(135deg, rgba(236,72,153,.2), rgba(168,85,247,.15));
+      box-shadow: var(--shadow), var(--glow);
+    }
+
+    @media (max-width: 600px){
+      .hero h1{font-size:28px}
+      .packages{grid-template-columns: 1fr}
+      .package__head{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="brand">
+<a class="brand__logo" href="#">
+  <img src="ehtimam-color-150x150.png" alt="EHTIMAM Logo" style="width:100%;height:100%;object-fit:contain;padding:8px">
+</a>
+        <div>
+<div class="brand__name">EHTIMAM SPA</div>
+          <div class="brand__tag">تجربة فخمة من الاسترخاء</div>
+        </div>
+      </div>
+
+      <a class="btn btn--ghost" href="#packages">الخدمات</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>احجز جلستك الآن</h1>
+      <p>اختر الباقة المناسبة وسيتم تجهيز رسالة واتساب تلقائياً بكل التفاصيل</p>
+    </section>
+
+    <section id="packages" class="packages">
+      <article class="card package" data-package="باقة رفاهية" data-price="299">
+        <div class="package__head">
+          <h2>باقة رفاهية</h2>
+          <div class="price">299 <span>ريال</span></div>
+        </div>
+        <div class="duration">60 دقيقة</div>
+        <p>تجربة دافئة وتنظيف عميق لأسبوعك المرهق.</p>
+        <ul class="list">
+          <li>مساج استرخائي</li>
+          <li>حمام مغربي</li>
+          <li>تنظيف عميق للجسم</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة الظهر والأكتاف" data-price="179">
+        <div class="package__head">
+          <h2>باقة الظهر والأكتاف</h2>
+          <div class="price">179 <span>ريال</span></div>
+        </div>
+        <div class="duration">60 دقيقة</div>
+        <p>تخفيف الشد وتعب العمل اليومي.</p>
+        <ul class="list">
+          <li>مساج عميق للظهر</li>
+          <li>تحرير شد الرقبة والأكتاف</li>
+          <li>تمديدات بسيطة بعد الجلسة</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة استرخاء سريع" data-price="129">
+        <div class="package__head">
+          <h2>باقة استرخاء سريع</h2>
+          <div class="price">129 <span>ريال</span></div>
+        </div>
+        <div class="duration">60 دقيقة</div>
+        <p>جلسة خفيفة لإعادة النشاط بسرعة.</p>
+        <ul class="list">
+          <li>مساج استرخائي 30 دقيقة</li>
+          <li>تركيز على الرقبة والكتف</li>
+          <li>زيت عطري خفيف</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة مساج عميق" data-price="249">
+        <div class="package__head">
+          <h2>باقة مساج عميق</h2>
+          <div class="price">249 <span>ريال</span></div>
+        </div>
+        <div class="duration">60 دقيقة</div>
+        <p>للشد القوي والعُقد العضلية.</p>
+        <ul class="list">
+          <li>مساج عميق للجسم</li>
+          <li>تركيز على نقاط الألم</li>
+          <li>تفكيك تيبس العضلات</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة الأرجل والقدمين" data-price="149">
+        <div class="package__head">
+          <h2>باقة الأرجل والقدمين</h2>
+          <div class="price">149 <span>ريال</span></div>
+        </div>
+        <div class="duration">60 دقيقة</div>
+        <p>راحة بعد المشي والدوام الطويل.</p>
+        <ul class="list">
+          <li>مساج أرجل</li>
+          <li>مساج أقدام</li>
+          <li>تخفيف ثِقل القدمين</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة رياضي" data-price="199">
+        <div class="package__head">
+          <h2>باقة رياضي</h2>
+          <div class="price">199 <span>ريال</span></div>
+        </div>
+        <div class="duration">60 دقيقة</div>
+        <p>قبل/بعد التمرين لتسريع الاستشفاء.</p>
+        <ul class="list">
+          <li>مساج رياضي</li>
+          <li>تركيز على الأرجل والفخذ</li>
+          <li>إعادة مرونة العضلات</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة أحجار ساخنة" data-price="229">
+        <div class="package__head">
+          <h2>باقة أحجار ساخنة</h2>
+          <div class="price">229 <span>ريال</span></div>
+        </div>
+        <div class="duration">60 دقيقة</div>
+        <p>دفء عميق يخفف التوتر بسرعة.</p>
+        <ul class="list">
+          <li>مساج استرخائي</li>
+          <li>أحجار ساخنة على الظهر</li>
+          <li>تركيز على نقاط التوتر</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة VIP" data-price="349">
+        <div class="package__head">
+          <h2>باقة VIP</h2>
+          <div class="price">349 <span>ريال</span></div>
+        </div>
+        <div class="duration">60 دقيقة</div>
+        <p>تجربة متكاملة لراحة قصوى.</p>
+        <ul class="list">
+          <li>مساج عميق + استرخائي</li>
+          <li>تركيز كامل على الجسم</li>
+          <li>تقييم سريع لنقاط الألم</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة اشتراك 4 جلسات" data-price="699">
+        <div class="package__head">
+          <h2>باقة اشتراك 4 جلسات</h2>
+          <div class="price">699 <span>ريال</span></div>
+        </div>
+        <div class="duration">60 دقيقة</div>
+        <p>وفر أكثر مع اشتراك الجلسات.</p>
+        <ul class="list">
+          <li>4 جلسات خلال شهر</li>
+          <li>اختيار نوع المساج لكل جلسة</li>
+          <li>أولوية في المواعيد</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+
+      <article class="card package" data-package="باقة نشاط" data-price="159">
+        <div class="package__head">
+          <h2>باقة نشاط</h2>
+          <div class="price">159 <span>ريال</span></div>
+        </div>
+        <div class="duration">50 دقيقة</div>
+        <p>للانتعاش السريع وإعادة النشاط.</p>
+        <ul class="list">
+          <li>مساج (استرخائي / عميق / رياضي)</li>
+          <li>جاكوزي أقدام</li>
+          <li>جلسة مركزة لتخفيف الشد</li>
+        </ul>
+        <button class="btn btn--primary selectBtn" type="button">اختيار هذه الباقة</button>
+      </article>
+    </section>
+  </main>
+
+  <div class="stickyBar" id="stickyBar">
+    <div class="container stickyBar__inner">
+      <div class="chosen">
+        <div class="chosen__title" id="chosenTitle">اختر باقة للمتابعة</div>
+        <div class="chosen__meta muted" id="chosenMeta">سيتم تجهيز رسالة واتساب تلقائيًا.</div>
+      </div>
+
+      <a class="btn btn--primary btn--glow" id="bookNow" href="#" target="_blank" rel="noopener">
+        احجز الآن
+      </a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
